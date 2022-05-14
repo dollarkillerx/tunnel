@@ -21,10 +21,14 @@ func InitConf() {
 	file, err := ioutil.ReadFile("tunnel.json")
 	if err != nil {
 		var c = conf{
-			ProxyItem: []proxyItem{},
+			ProxyItem: []proxyItem{
+				{
+					ExternalAddress: "",
+					ProxyAddress:    "",
+				},
+			},
 		}
-		s, _ := json.Marshal(c)
-		indent, _ := json.MarshalIndent(s, "", "    ")
+		indent, _ := json.MarshalIndent(c, "", "    ")
 		err := ioutil.WriteFile("tunnel.json", indent, 00666)
 		if err != nil {
 			log.Fatalln("Default Generate Config Error: ", err)
